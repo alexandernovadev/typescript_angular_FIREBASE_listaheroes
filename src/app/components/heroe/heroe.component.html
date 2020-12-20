@@ -1,0 +1,54 @@
+<h3>Héroe <small>{{ heroe.nombre }}</small></h3>
+<button type="button" [routerLink]="['/heroes']" class="btn btn-outline-danger">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    Volver
+</button>
+<button type="button" (click)="nuevoHeroe(form)" class="btn btn-outline-primary">
+    <i class="fa fa-user" aria-hidden="true"></i>
+    Nuevo
+</button>
+<hr>
+
+<div class="row animated fadeIn fast">
+    <div class="col-md-12">
+        <form (ngSubmit)="guardar()" #form="ngForm">
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input [(ngModel)]="heroe.nombre"
+                type="text" name="nombre"
+                class="form-control"
+                placeholder="Nombre del héroe"
+                required>
+            </div>
+            <div class="form-group">
+                <label>Casa</label>
+                <select [(ngModel)]="heroe.casa"
+                    class="form-control" name="casa">
+                    <option value="Marvel">Marvel</option>
+                    <option value="DC">DC</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Bio</label>
+                <textarea [(ngModel)]="heroe.bio"
+                type="text" name="bio"
+                class="form-control"
+                placeholder="Bio del héroe"></textarea>
+            </div>
+
+            <div class="form-group">
+                <button [disabled]="form.invalid"
+                type="submit" class="btn btn-outline-primary">
+                    <i class="fa fa-floppy-o"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+
+        <!-- {{ heroe | json }} -->
+
+    </div>
+
+</div>

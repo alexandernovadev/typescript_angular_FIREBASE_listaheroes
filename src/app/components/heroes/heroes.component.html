@@ -1,0 +1,72 @@
+<h1> 
+  Heroes
+</h1>
+<hr>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+      <!-- Aqui en el Router envio el parametro nuevo, a la direccion /heroe
+      es importante el slash antes de heroe -->
+        <button [routerLink]="['/heroe', 'nuevo']"
+        type="button" name="button" class="btn btn-outline-primary">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Nuevo
+        </button>
+    </div>
+</div>
+<br>
+
+<div class="row animated fadeIn fast">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Casa</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- LO que pasa es que al llamar los datos trae un arreglo,
+                    entonces el man lo que hizo fue crear un pipe para que 
+                    recorriera los datos y lo willadd a donde ??
+                        A un arreglo del PIPE WOWOWOWO WTF
+                    -->
+
+                    <tr *ngFor="let hero of heroes| keys ; let i = index">
+                        <th scope="row">{{ i }}</th>
+                        <td>{{heroes[hero].nombre }}</td>
+                        <td>{{ heroes[hero].casa }}</td>
+                        <td>
+                            <a [routerLink]="['/heroe', hero]" class="text-primary">
+                                <i class="fas fa-pencil-alt fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        <td>    
+                            <a (click)="borrarHeroe(hero)" class="text-danger" >
+                                <i class="fas fa-trash-alt fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div *ngIf="(heroes | keys).length === 0 && !loading"
+            class="alert alert-info" role="alert">
+                 <strong>No</strong> hay heroes
+            </div>
+
+            <div *ngIf="loading"
+            class="alert alert-warning" role="alert">
+
+                <strong>Cargando...</strong> Por vaor, espere.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
